@@ -14,7 +14,7 @@ if (isset($_POST['Create'])) {
 else
 {
 // Establishing Connection with Server by passing server_name, user_id and password as a parameter
-    $connection = mysqli_connect("localhost", "admin", "redhat");
+    $connection = mysqli_connect("localhost", "root", "redhat");
     if ($connection->connect_error) {
         die("Connection failed: " . $connection->connect_error);
         echo('connection to db failed');
@@ -26,14 +26,11 @@ else
     // Selecting Database
     $db = mysqli_select_db($connection, "cmpe281");
     // SQL query to fetch information of registerd users and finds user match.
-    $query = mysqli_query($connection, "select * from communities where community_name='$commname';");
+    $query = mysqli_query($connection, "select * from community_details where comm_name='$commname';");
     $rows = mysqli_num_rows($query);
     echo("Number of username rows = " + $rows);
     if ($rows == 0) {
-        $query = mysqli_query($connection, "insert into communities values('$commname');");
-        echo(mysqli_error($connection));
-        $_SESSION['error1'] = "New Community Created";
-        header("location: ../createcomm.php");
+        $result = shell_exec('/usr/bin/python /var/www/html/testscript.py ' . $commname);
     }
     else {
         $error = "Community name is occupied, try another!";
