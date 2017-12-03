@@ -28,9 +28,10 @@ else
     // SQL query to fetch information of registerd users and finds user match.
     $query = mysqli_query($connection, "select * from community_details where comm_name='$commname';");
     $rows = mysqli_num_rows($query);
-    echo("Number of username rows = " + $rows);
+    echo("Number of username rows = ".$rows);
     if ($rows == 0) {
         $result = shell_exec('/usr/bin/python /var/www/html/testscript.py ' . $commname);
+        echo($result);
     }
     else {
         $error = "Community name is occupied, try another!";
