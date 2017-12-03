@@ -1,28 +1,38 @@
 import paramiko
 import boto3
 import time
+import pymysql
 
+key_id = ""
+accesskey = ""
 def createinstance():
-    ec2 = boto3.resource('ec2', aws_access_key_id="",
-                         aws_secret_access_key="", region_name='us-west-1')
-    for instance in ec2.instances.all():
-        print(instance.id, instance.state)
-
+    ec2 = boto3.resource('ec2', aws_access_key_id=key_id,
+                         aws_secret_access_key=accesskey, region_name='us-west-1')
     instance = ec2.create_instances(
         ImageId='ami-45ead225',
         MinCount=1,
         MaxCount=1,
         InstanceType='t2.micro',
         KeyName = 'masternode281',
-        SecurityGroupIds = ['sg-e22a2784']
+        SecurityGroupIds = ['sg-85c4cbe3']
     )
     print("Your New Instance : ", instance[0].id, instance[0].public_ip_address, instance[0].state['Name'])
     print("Waiting to complete....")
     instance[0].wait_until_running()
     time.sleep(30)
-    print("Now Provisioning....")
-    build_depencies(instance[0].public_ip_address)
-    return(instance[0].id, instance[0].public_ip_address, instance[0].state['Name'])
+    ec2 = boto3.resource('ec2', aws_access_key_id=key_id,
+                         aws_secret_access_key=accesskey, region_name='us-west-1')
+    new_ip_address = ""
+    state_of_new_machine = ""
+    for machine in ec2.instances.all():
+        if machine.id == instance[0].id:
+            new_ip_address = machine.public_ip_address
+            state_of_new_machine = machine.state['Name']
+            print(machine.id, new_ip_address)
+            break
+    print("Now Provisioning....", new_ip_address)
+    build_depencies(new_ip_address)
+    return(instance[0].id, new_ip_address, state_of_new_machine)
 
 def build_depencies(host_ip):
     replace_CGI1 = "sudo sed -i.bak '2i\    <Directory /var/www/html>' /etc/apache2/sites-enabled/000-default.conf"
@@ -37,11 +47,6 @@ def build_depencies(host_ip):
     print("connecting......!")
     c.connect(hostname=host_ip, username="ubuntu", pkey=k)
     commands = ["sudo apt-get -y update && sudo apt-get -y upgrade",
-                replace_CGI1,
-                replace_CGI2,
-                replace_CGI3,
-                replace_CGI4,
-                replace_CGI5,
                 "echo \"America/Chicago\" > sudo /etc/timezone",
                 "sudo dpkg-reconfigure -f noninteractive tzdata",
                 "sudo apt-get -y install zsh htop",
@@ -73,20 +78,26 @@ def build_depencies(host_ip):
                 "sudo -H pip3 install pymysql",
                 "sudo -H pip3 install paramiko",
                 "sudo -H pip3 install autobahn[twisted]",
+                replace_CGI1,
+                replace_CGI2,
+                replace_CGI3,
+                replace_CGI4,
+                replace_CGI5
                 ]
     for command in commands:
-        print("Executing {}".format(command))
+    #    print("Executing {}".format(command))
         stdin, stdout, stderr = c.exec_command(command)
-        print(stdout.read())
+    #    print(stdout.read())
         print("Errors")
         print(stderr.read())
     c.close()
 
-ec2 = boto3.resource('ec2', aws_access_key_id="",
-                         aws_secret_access_key="", region_name='us-west-1')
+ec2 = boto3.resource('ec2', aws_access_key_id=key_id,
+                         aws_secret_access_key=accesskey, region_name='us-west-1')
 for instance in ec2.instances.all():
     print(instance.id, instance.state['Name'], instance.public_ip_address)
 
 print("Building a new machine now....")
-build_depencies('54.241.130.51')
-print("Details of your instance - ", createinstance())
+instance_details = [createinstance()]
+print("Instance details = ", instance_details)
+
