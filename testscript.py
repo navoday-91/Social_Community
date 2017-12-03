@@ -8,7 +8,7 @@ cgitb.enable()
 print("Content-Type: text/html")
 print()
 print("Community requested is : {}\n".format(' '.join(sys.argv)))
-time.sleep(5)
+time.sleep(1)
 print("Community requested is : {}".format(' '.join(sys.argv)))
 def page(self):
     yield (
@@ -23,3 +23,4 @@ def page(self):
         yield '<script type="text/javascript">update(%i);</script>'%i
         time.sleep(1)
     yield '</body></html>'
+page()
