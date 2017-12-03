@@ -7,5 +7,4 @@ cgitb.enable()
 # Print necessary headers.
 print("Content-Type: text/html")
 print()
-comm = sys.argv[1]
-print("Community requested is : {}".format(comm))
+print("Community requested is : {}".format(' '.join(sys.argv[1])))
