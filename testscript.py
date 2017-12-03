@@ -10,7 +10,7 @@ print()
 print("Community requested is : {}\n".format(' '.join(sys.argv)))
 time.sleep(1)
 print("Community requested is : {}".format(' '.join(sys.argv)))
-def page(self):
+def page():
     yield (
         '<html><body><div id="counter">-</div>'
         '<script type="text/javascript">'
