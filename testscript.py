@@ -15,7 +15,7 @@ def page():
         '<html><body><div id="counter">-</div>'
         '<script type="text/javascript">'
         '    function update(n) {'
-        '        document.getElementById("counter").firstChild.data= n;'
+        '        document.write(n);'
         '    }'
         '</script>'
     )
