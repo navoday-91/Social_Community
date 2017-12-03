@@ -8,7 +8,18 @@ cgitb.enable()
 print("Content-Type: text/html")
 print()
 print("Community requested is : {}\n".format(' '.join(sys.argv)))
-sys.stdout.flush()
 time.sleep(5)
 print("Community requested is : {}".format(' '.join(sys.argv)))
-sys.stdout.flush()
+def page(self):
+    yield (
+        '<html><body><div id="counter">-</div>'
+        '<script type="text/javascript">'
+        '    function update(n) {'
+        '        document.getElementById("counter").firstChild.data= n;'
+        '    }'
+        '</script>'
+    )
+    for i in range(10):
+        yield '<script type="text/javascript">update(%i);</script>'%i
+        time.sleep(1)
+    yield '</body></html>'
