@@ -1,10 +1,23 @@
+#!/usr/bin/python
+
+# Turn on debug mode.
+import cgitb
+cgitb.enable()
 import paramiko
 import boto3
 import time
-import pymysql
+import pymysql.cursors
+
+# Print necessary headers.
+print("Content-Type: text/html")
+print()
 
 key_id = ""
 accesskey = ""
+db = pymysql.connect("localhost", "root", "redhat", "cmpe281")
+
+# prepare a cursor object using cursor() method
+cursor = db.cursor()
 def createinstance():
     ec2 = boto3.resource('ec2', aws_access_key_id=key_id,
                          aws_secret_access_key=accesskey, region_name='us-west-1')
