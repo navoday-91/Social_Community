@@ -3,8 +3,8 @@ import boto3
 import time
 
 def createinstance():
-    ec2 = boto3.resource('ec2', aws_access_key_id="AKIAJ7O7TXRTN3RSUDUQ",
-                         aws_secret_access_key="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", region_name='us-west-1')
+    ec2 = boto3.resource('ec2', aws_access_key_id="",
+                         aws_secret_access_key="", region_name='us-west-1')
     for instance in ec2.instances.all():
         print(instance.id, instance.state)
 
@@ -19,7 +19,7 @@ def createinstance():
     print("Your New Instance : ", instance[0].id, instance[0].public_ip_address, instance[0].state['Name'])
     print("Waiting to complete....")
     instance[0].wait_until_running()
-    time.sleep(10)
+    time.sleep(30)
     print("Now Provisioning....")
     build_depencies(instance[0].public_ip_address)
     return(instance[0].id, instance[0].public_ip_address, instance[0].state['Name'])
@@ -82,8 +82,8 @@ def build_depencies(host_ip):
         print(stderr.read())
     c.close()
 
-ec2 = boto3.resource('ec2', aws_access_key_id="AKIAJ7O7TXRTN3RSUDUQ",
-                         aws_secret_access_key="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", region_name='us-west-1')
+ec2 = boto3.resource('ec2', aws_access_key_id="",
+                         aws_secret_access_key="", region_name='us-west-1')
 for instance in ec2.instances.all():
     print(instance.id, instance.state['Name'], instance.public_ip_address)
 
