@@ -22,6 +22,7 @@ echo($error);
 header("location: ../index.php"); // Redirecting To Login Page
 }
 }
+else{
 
 $dbpath = "54.183.103.17";
 // Establishing Connection with Server by passing server_name, user_id and password as a parameter
@@ -52,7 +53,7 @@ $error = "Comm Path".$commpath.",  Communty".$community;
 $_SESSION['error'] = $error;
 echo("Comm Path".$commpath."Communty".$community);
 header("location: ../index.php"); // Redirecting To Community Page
-
+}
 }
 }
 ?>
