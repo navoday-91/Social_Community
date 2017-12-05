@@ -10,6 +10,7 @@ accesskey = ""
 community_name_full = ' '.join(sys.argv[1:])
 community_name = ''.join(e for e in community_name_full if e.isalnum())
 
+
 elbv2 = boto3.client('elbv2', aws_access_key_id=key_id,
                          aws_secret_access_key=accesskey, region_name='us-west-1')
 
@@ -128,7 +129,7 @@ try:
     db = pymysql.connect(rds_ip, "admin", "redhat123", "cmpe281")
 except:
     print('failed')
-
+cursor = db.cursor()
 sql = "create table login(`username` varchar(30), `password` varchar(20), `community_name` varchar(20));"
 print(sql)
 
@@ -154,7 +155,5 @@ try:
 except:
     print("Error Here3")
 db.commit()
-
-
 
 db.close()
