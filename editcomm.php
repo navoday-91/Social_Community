@@ -316,7 +316,6 @@ if ($connection->connect_error) {
     echo('connection to db failed');
     echo($connection);
 }
-echo("Connected successfully \n");
 $db = mysqli_select_db($connection, "cmpe281");
 // SQL query to fetch information of registerd users and finds user match.
 $query = mysqli_query($connection, "select * from community_details where comm_name = $community;");
@@ -333,7 +332,6 @@ if ($connection->connect_error) {
     echo('connection to db failed');
     echo($connection);
 }
-echo("Connected successfully \n");
                                                 // SQL query to fetch information of registerd users and finds user match.
                                                 $query = mysqli_query($connection, "update login set role = 'manager' where username = '$newmgr';");
                                                 
@@ -350,7 +348,6 @@ echo("Connected successfully \n");
                                                     echo('connection to db failed');
                                                     echo($connection);
                                                 }
-                                                echo("Connected successfully \n");
                                                 $db = mysqli_select_db($connection, "cmpe281");
                                                 // SQL query to fetch information of registerd users and finds user match.
                                                 $query = mysqli_query($connection, "select * from community_details where comm_name = $community;");
@@ -366,7 +363,6 @@ echo("Connected successfully \n");
                                                     echo('connection to db failed');
                                                     echo($connection);
                                                 }
-                                                echo("Connected successfully \n");
                                                         $db = mysqli_select_db($connection, "cmpe281");
                                                 $delmgr = ($_POST['del_mgr']);
                                                 
@@ -393,27 +389,10 @@ echo("Connected successfully \n");
                                                     echo('connection to db failed');
                                                     echo($connection);
                                                 }
-                                                echo("Connected successfully \n");
                                                 $db = mysqli_select_db($connection, "cmpe281");
                                                 // SQL query to fetch information of registerd users and finds user match.
-                                                $query = mysqli_query($connection, "select * from community_details where comm_name = $community;");
-                                                // To protect MySQL injection for Security purpose
-                                                if ($rows == 1) {
-                                                    while ($user = $query->fetch_assoc()) {
-                                                        $dbpath = $user["comm_db"];
-                                                        
-                                                    }}
-                                                $connection = mysqli_connect($dbpath, "admin", "redhat123", "cmpe281");
-                                                if ($connection->connect_error) {
-                                                    die("Connection failed: " . $connection->connect_error);
-                                                    echo('connection to db failed');
-                                                    echo($connection);
-                                                }
-                                                echo("Connected successfully \n");
-                                                        $db = mysqli_select_db($connection, "cmpe281");
-                                                        // SQL query to fetch communities.
-                                                        $query = mysqli_query($connection, "select * from communities;");
-                                                        $rows = mysqli_num_rows($query);
+                                                $query = mysqli_query($connection, "select * from community_details;");
+                                                $rows = mysqli_num_rows($query);
                                                         
                                                   ?>
                                                   <label for="community" class="control-label">Community Name:</label>
@@ -421,7 +400,7 @@ echo("Connected successfully \n");
                                                           <option value = ""> Select Community</option>
                                                         <?php if ($rows > 0) {
                                                             while ($user = $query->fetch_assoc()) { ?>
-                                                                <option value = "<?php echo($user['community_name']); ?>" <?php if ($user['community_name'] == $_SESSION['addmgrcomm']){echo('selected');} ?>> <?php echo($user['community_name']);
+                                                                <option value = "<?php echo($user['community_name']); ?>" <?php if ($user['comm_name'] == $_SESSION['addmgrcomm']){echo('selected');} ?>> <?php echo($user['comm_name']);
                                                         ?></option>
                                                         <?php } } 
                                                             else{?>
@@ -463,7 +442,6 @@ echo("Connected successfully \n");
                                                     echo('connection to db failed');
                                                     echo($connection);
                                                 }
-                                                echo("Connected successfully \n");
                                                 $db = mysqli_select_db($connection, "cmpe281");
                                                 // SQL query to fetch information of registerd users and finds user match.
                                                 $query = mysqli_query($connection, "select * from community_details where comm_name = $commname;");
@@ -480,7 +458,6 @@ echo("Connected successfully \n");
                                                     echo('connection to db failed');
                                                     echo($connection);
                                                 }
-                                                echo("Connected successfully \n");
                                                 $db = mysqli_select_db($connection, "cmpe281");
                                                 // SQL query to fetch information of registerd users and finds user match.
                                                 $query = mysqli_query($connection, "select login.`username`, userdata.`first name`, userdata.`last name` from userdata, login where userdata.username = login.username and login.community_name = '$commname' and login.role = 'manager';");
@@ -522,7 +499,6 @@ if ($connection->connect_error) {
     echo('connection to db failed');
     echo($connection);
 }
-echo("Connected successfully \n");
 $community = $_POST['community'];
 $db = mysqli_select_db($connection, "cmpe281");
 // SQL query to fetch information of registerd users and finds user match.
@@ -540,7 +516,6 @@ if ($connection->connect_error) {
     echo('connection to db failed');
     echo($connection);
 }
-echo("Connected successfully \n");
                                                         $db = mysqli_select_db($connection, "cmpe281");
                                                         // SQL query to fetch information of registerd users and finds user match.
                                                         $query = mysqli_query($connection, "select `username` from login where community_name = '$commname' and role = 'citizen';");
