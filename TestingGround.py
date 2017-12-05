@@ -7,8 +7,10 @@ from pymysql import MySQLError
 key_id = ""
 accesskey = ""
 
-community_name_full = ' '.join(sys.argv[1:])
-community_name = ''.join(e for e in community_name_full if e.isalnum())
+#community_name_full = ' '.join(sys.argv[1:])
+#community_name = ''.join(e for e in community_name_full if e.isalnum())
+community_name_full = 'Test Comm'
+community_name = 'TestComm'
 
 elbv2 = boto3.client('elbv2', aws_access_key_id=key_id,
                          aws_secret_access_key=accesskey, region_name='us-west-1')
@@ -98,11 +100,57 @@ except MySQLError as e:
     print(e)
 # prepare a cursor object using cursor() method
 cursor = db.cursor()
-sql = "insert into community_details values('"+community_name_full+"',"+rds_arn+"',"+community_name+"rdsdb"+"',"+\
-      rds_ip+"',"+target_group_arn+"',"+lb_arn+"',"+lb_ip+")"
+
+sql = "insert into community_details values('"+community_name_full+"','"+rds_arn+"','"+community_name+"rdsdb"+"','"+\
+      rds_ip+"','"+target_group_arn+"','"+lb_arn+"','"+lb_ip+"');"
 
 try:
     cursor.execute(sql)
 except:
     print("Error: unable to insert data")
+db.commit()
 
+try:
+    db = pymysql.connect(rds_ip, "admin", "redhat123")
+except:
+    print('failed1')
+# prepare a cursor object using cursor() method
+cursor = db.cursor()
+
+sql = "create database cmpe281;"
+
+try:
+    cursor.execute(sql)
+except:
+    print("Error Here1")
+
+db.commit()
+
+try:
+    db = pymysql.connect(rds_ip, "admin", "redhat123", "cmpe281")
+except:
+    print('failed')
+
+sql = "create table login(`username` varchar(30), `password` varchar(20), `community_name` varchar(20);"
+print(sql)
+
+try:
+    cursor.execute(sql)
+except:
+    print("Error Here2")
+
+sql = "create table userdata(`username` varchar(30), `first name` varchar(20), `last name` varchar(20), `email` " \
+      "varchar(50), `address` varchar(50), `phone` varchar(20), `community` varchar(40), `picurl` varchar(300);"
+print(sql)
+
+try:
+    cursor.execute(sql)
+except:
+    print("Error Here3")
+
+
+db.commit()
+
+
+
+db.close()
