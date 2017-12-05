@@ -48,6 +48,8 @@ if ($rows == 1) {
 $_SESSION['community']=$community; 
 $_SESSION['role']=$role; 
 mysqli_close($connection); // Closing Connection
+$error = "Comm Path".$commpath.",  Communty".$community;
+$_SESSION['error'] = $error;
 echo("Comm Path".$commpath."Communty".$community);
 //header("location: $commpath/index.php"); // Redirecting To Community Page
 
