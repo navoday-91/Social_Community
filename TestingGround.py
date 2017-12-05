@@ -7,10 +7,8 @@ from pymysql import MySQLError
 key_id = ""
 accesskey = ""
 
-#community_name_full = ' '.join(sys.argv[1:])
-#community_name = ''.join(e for e in community_name_full if e.isalnum())
-community_name_full = 'Test Comm'
-community_name = 'TestComm'
+community_name_full = ' '.join(sys.argv[1:])
+community_name = ''.join(e for e in community_name_full if e.isalnum())
 
 elbv2 = boto3.client('elbv2', aws_access_key_id=key_id,
                          aws_secret_access_key=accesskey, region_name='us-west-1')
