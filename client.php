@@ -149,7 +149,7 @@
           }
           function doConnect()
           {
-            websocket = new WebSocket("ws://35.197.90.146:9000/");
+            websocket = new WebSocket("ws://54.183.103.17:9000/");
             websocket.onopen = function(evt) { onOpen(evt) };
             websocket.onclose = function(evt) { onClose(evt) };
             websocket.onmessage = function(evt) { onMessage(evt) };
@@ -189,27 +189,8 @@
                     }
                 }
             if (found == 0){
-                <?php 
-                    $inuser = "<script>document.write(inuser)</script>";
-                ?>
-                <?php
-                $connection = mysqli_connect("localhost", "admin", "redhat");
-                // Selecting Database
-                    $db = mysqli_select_db($connection, "cmpe281");
-                    $community = $_SESSION['community'];
-                    // SQL query to fetch information of registerd users and finds user match.
-                    $query = mysqli_query($connection, "select `username`, `first name`, `last name`, `picurl` from userdata where username = '$inuser';");
-                    $rows = mysqli_num_rows($query);
-                    if ($rows > 0) {
-                        while ($user = $query->fetch_assoc()) {
-                ?>
-                var fname = "<?php echo($user["first name"]) ?>";
-                var lname = "<?php echo($user["last name"]) ?>"
-                register_popup(inuser, fname.concat(" ".concat(lname)));
-                <?php
-                        }
-                    }
-                ?>
+                
+                register_popup(inuser, inuser);
             }
             writeToScreen(evt.data.split(";",3)[0]+': '+evt.data.split(";",3)[2] +'\n');
           }

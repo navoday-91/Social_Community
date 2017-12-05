@@ -55,13 +55,31 @@ if (isset($_POST['Register'])) {
 else
 {
 // Establishing Connection with Server by passing server_name, user_id and password as a parameter
-    $connection = mysqli_connect("localhost", "admin", "redhat");
-    if ($connection->connect_error) {
-        die("Connection failed: " . $connection->connect_error);
-        echo('connection to db failed');
-        echo($connection);
+    $dbpath = "54.183.103.17";
+// Establishing Connection with Server by passing server_name, user_id and password as a parameter
+$connection = mysqli_connect($dbpath, "root", "redhat", "cmpe281");
+if ($connection->connect_error) {
+    die("Connection failed: " . $connection->connect_error);
+    echo('connection to db failed');
+    echo($connection);
+}
+echo("Connected successfully \n");
+$db = mysqli_select_db($connection, "cmpe281");
+// SQL query to fetch information of registerd users and finds user match.
+$query = mysqli_query($connection, "select * from community_details where comm_name = $community;");
+// To protect MySQL injection for Security purpose
+if ($rows == 1) {
+    while ($user = $query->fetch_assoc()) {
+        $dbpath = $user["comm_db"];
+        
     }
-    echo("Connected successfully \n");
+$connection = mysqli_connect($dbpath, "admin", "redhat123", "cmpe281");
+if ($connection->connect_error) {
+    die("Connection failed: " . $connection->connect_error);
+    echo('connection to db failed');
+    echo($connection);
+}
+echo("Connected successfully \n");
     // To protect MySQL injection for Security purpose
     $username = ($_POST['user_username']);
     $password = ($_POST['user_password']);
@@ -94,9 +112,9 @@ else
             $_SESSION['error'] = $error;
             header("location: ../register.php"); // Redirecting To Registration Page
         }
-        $query = mysqli_query($connection, "insert into userdata values(default,'$username','$firstname','$lastname','$email','$address','$phone', '$community', '$picurl');");
+        $query = mysqli_query($connection, "insert into userdata values('$username','$firstname','$lastname','$email','$address','$phone', '$community', '$picurl');");
         echo(mysqli_error($connection));
-        $query = mysqli_query($connection, "insert into login values(default,'$username','$password','$community','citizen');");
+        $query = mysqli_query($connection, "insert into login values('$username','$password','$community','citizen');");
         echo(mysqli_error($connection));
         $_SESSION['error'] = "Registration Successful";
         header("location: ../index.php");
