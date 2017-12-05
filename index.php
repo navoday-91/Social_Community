@@ -18,7 +18,7 @@
     <div class="dialog-content">
       <form id="login_form" class="dialog-form" action="php/cmpe281login.php" method="POST">
         <fieldset>
-          <legend>Log in</legend>
+          <legend>Administrator Log in</legend>
           <div class="form-group">
             <label for="user_username" class="control-label">Username:</label>
             <input type="text" id="user_username" class="form-control" name="user_username" autofocus/>
@@ -43,6 +43,40 @@
           </div>
           <div class="text-center">
             <p>Do you wish to register<br> for <a href="register.php" class="link user-actions"><strong>a new account</strong></a>?</p>
+          </div>
+        </fieldset>
+      </form>
+      <form id="login_form" class="dialog-form" action="php/cmpe281login.php" method="POST">
+        <fieldset>
+          <legend>Community Log in and Registration</legend>
+          <?php
+                $connection = mysqli_connect("localhost", "root", "redhat");
+                if ($connection->connect_error) {
+                    die("Connection failed: " . $connection->connect_error);
+                    echo('connection to db failed');
+                    echo($connection);
+                }
+                $db = mysqli_select_db($connection, "cmpe281");
+                // SQL query to fetch communities.
+                $query = mysqli_query($connection, "select * from community_details;");
+                $rows = mysqli_num_rows($query);
+
+          ?>
+
+          <div class="field-wrap">
+              <select name = "community"> Community
+                  <option value = ""> Select Community</option>
+                <?php if ($rows > 0) {
+                    while ($user = $query->fetch_assoc()) { ?>
+                        <option value = "<?php echo($user['comm_name']); ?>"> <?php echo($user['comm_name']); ?></option>
+                    <?php } }
+                    else{?>
+                        <option value = ""> No Communities Available</option>
+                    <?php } ?>
+            </select>
+          </div>
+          <div class="pad-top-20 pad-btm-20">
+            <input type="submit" class="btn btn-default btn-block btn-lg" name="Ok" value="Ok">
           </div>
         </fieldset>
       </form>
