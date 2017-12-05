@@ -52,8 +52,8 @@ auto_scaling = boto3.client('autoscaling', aws_access_key_id=key_id,
 auto_scale_response = auto_scaling.create_auto_scaling_group(
     AutoScalingGroupName=community_name,
     LaunchConfigurationName='Community_Launch',
-    MaxSize=3,
-    MinSize=1,
+    MaxSize=5,
+    MinSize=2,
     VPCZoneIdentifier='subnet-a66966fe, subnet-f8f9079f',
     TargetGroupARNs=[target_group_arn]
 )
