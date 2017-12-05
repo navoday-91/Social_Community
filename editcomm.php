@@ -3,6 +3,7 @@
 
 <?php
                                                 session_start();
+                                                $community = $_POST['community'];
                                               ?>
                                               
 <!-- start coded_template: id:3859515515 path:generated_layouts/3859515505.html --><!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]--><!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en">        <![endif]--><!--[if IE 8]>    <html class="no-js lt-ie9" lang="en">               <![endif]--><!--[if gt IE 8]><!--><html class="no-js" lang="en"><!--<![endif]--><head>
@@ -307,17 +308,31 @@
                         <span id="hs_cos_wrapper_module_14045563837526290" class="hs_cos_wrapper hs_cos_wrapper_widget_container hs_cos_wrapper_type_widget_container" style="" data-hs-cos-general-type="widget_container" data-hs-cos-type="widget_container"><div id="hs_cos_wrapper_widget_3699427007" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_rich_text" style="" data-hs-cos-general-type="widget" data-hs-cos-type="rich_text"><p><span class="hs_cos_wrapper hs_cos_wrapper_widget_container hs_cos_wrapper_type_widget_container" data-hs-cos-general-type="widget_container" data-hs-cos-type="widget_container">
                                         <ul>
                                             <?php if (isset($_POST['Add'])) {
-                                                $connection = mysqli_connect("localhost", "admin", "redhat");
-                                                        if ($connection->connect_error) {
-                                                            die("Connection failed: " . $connection->connect_error);
-                                                            echo('connection to db failed');
-                                                            echo($connection);
-                                                        }
-                                                        $db = mysqli_select_db($connection, "cmpe281");
-                                                $newmgr = ($_POST['new_mgr']);
-                                                
-                                                // Selecting Database
-                                                $db = mysqli_select_db($connection, "cmpe281");
+                                                $dbpath = "54.183.103.17";
+// Establishing Connection with Server by passing server_name, user_id and password as a parameter
+$connection = mysqli_connect($dbpath, "root", "redhat", "cmpe281");
+if ($connection->connect_error) {
+    die("Connection failed: " . $connection->connect_error);
+    echo('connection to db failed');
+    echo($connection);
+}
+echo("Connected successfully \n");
+$db = mysqli_select_db($connection, "cmpe281");
+// SQL query to fetch information of registerd users and finds user match.
+$query = mysqli_query($connection, "select * from community_details where comm_name = $community;");
+// To protect MySQL injection for Security purpose
+if ($rows == 1) {
+    while ($user = $query->fetch_assoc()) {
+        $dbpath = $user["comm_db"];
+        
+    }
+$connection = mysqli_connect($dbpath, "admin", "redhat123", "cmpe281");
+if ($connection->connect_error) {
+    die("Connection failed: " . $connection->connect_error);
+    echo('connection to db failed');
+    echo($connection);
+}
+echo("Connected successfully \n");
                                                 // SQL query to fetch information of registerd users and finds user match.
                                                 $query = mysqli_query($connection, "update login set role = 'manager' where username = '$newmgr';");
                                                 
@@ -326,12 +341,31 @@
                                               }
                                             ?>        
                                             <?php if (isset($_POST['del_mgr'])) {
-                                                $connection = mysqli_connect("localhost", "admin", "redhat");
-                                                        if ($connection->connect_error) {
-                                                            die("Connection failed: " . $connection->connect_error);
-                                                            echo('connection to db failed');
-                                                            echo($connection);
-                                                        }
+                                                $dbpath = "54.183.103.17";
+// Establishing Connection with Server by passing server_name, user_id and password as a parameter
+$connection = mysqli_connect($dbpath, "root", "redhat", "cmpe281");
+if ($connection->connect_error) {
+    die("Connection failed: " . $connection->connect_error);
+    echo('connection to db failed');
+    echo($connection);
+}
+echo("Connected successfully \n");
+$db = mysqli_select_db($connection, "cmpe281");
+// SQL query to fetch information of registerd users and finds user match.
+$query = mysqli_query($connection, "select * from community_details where comm_name = $community;");
+// To protect MySQL injection for Security purpose
+if ($rows == 1) {
+    while ($user = $query->fetch_assoc()) {
+        $dbpath = $user["comm_db"];
+        
+    }
+$connection = mysqli_connect($dbpath, "admin", "redhat123", "cmpe281");
+if ($connection->connect_error) {
+    die("Connection failed: " . $connection->connect_error);
+    echo('connection to db failed');
+    echo($connection);
+}
+echo("Connected successfully \n");
                                                         $db = mysqli_select_db($connection, "cmpe281");
                                                 $delmgr = ($_POST['del_mgr']);
                                                 
@@ -350,7 +384,7 @@
                                               <div class="form-group">
                                                 
                                                 <?php
-                                                        $connection = mysqli_connect("localhost", "admin", "redhat");
+                                                        $connection = mysqli_connect("localhost", "root", "redhat");
                                                         if ($connection->connect_error) {
                                                             die("Connection failed: " . $connection->connect_error);
                                                             echo('connection to db failed');
@@ -401,6 +435,31 @@
                                                 }
                                                 $_SESSION['addmgrcomm'] = $commname;
                                                 // Selecting Database
+                                                $dbpath = "54.183.103.17";
+                                                // Establishing Connection with Server by passing server_name, user_id and password as a parameter
+                                                $connection = mysqli_connect($dbpath, "root", "redhat", "cmpe281");
+                                                if ($connection->connect_error) {
+                                                    die("Connection failed: " . $connection->connect_error);
+                                                    echo('connection to db failed');
+                                                    echo($connection);
+                                                }
+                                                echo("Connected successfully \n");
+                                                $db = mysqli_select_db($connection, "cmpe281");
+                                                // SQL query to fetch information of registerd users and finds user match.
+                                                $query = mysqli_query($connection, "select * from community_details where comm_name = $commname;");
+                                                // To protect MySQL injection for Security purpose
+                                                if ($rows == 1) {
+                                                    while ($user = $query->fetch_assoc()) {
+                                                        $dbpath = $user["comm_db"];
+                                                        
+                                                    }
+                                                $connection = mysqli_connect($dbpath, "admin", "redhat123", "cmpe281");
+                                                if ($connection->connect_error) {
+                                                    die("Connection failed: " . $connection->connect_error);
+                                                    echo('connection to db failed');
+                                                    echo($connection);
+                                                }
+                                                echo("Connected successfully \n");
                                                 $db = mysqli_select_db($connection, "cmpe281");
                                                 // SQL query to fetch information of registerd users and finds user match.
                                                 $query = mysqli_query($connection, "select login.`username`, userdata.`first name`, userdata.`last name` from userdata, login where userdata.username = login.username and login.community_name = '$commname' and login.role = 'manager';");
@@ -434,6 +493,32 @@
                                                     <select id="new_mgr" class="form-control" name = "new_mgr" autofocus> 
                                                           <option value = ""> Select User To Add</option>
                                                         <?php 
+                                                        $dbpath = "54.183.103.17";
+// Establishing Connection with Server by passing server_name, user_id and password as a parameter
+$connection = mysqli_connect($dbpath, "root", "redhat", "cmpe281");
+if ($connection->connect_error) {
+    die("Connection failed: " . $connection->connect_error);
+    echo('connection to db failed');
+    echo($connection);
+}
+echo("Connected successfully \n");
+$community = $_POST['community']
+$db = mysqli_select_db($connection, "cmpe281");
+// SQL query to fetch information of registerd users and finds user match.
+$query = mysqli_query($connection, "select * from community_details where comm_name = $community;");
+// To protect MySQL injection for Security purpose
+if ($rows == 1) {
+    while ($user = $query->fetch_assoc()) {
+        $dbpath = $user["comm_db"];
+        
+    }
+$connection = mysqli_connect($dbpath, "admin", "redhat123", "cmpe281");
+if ($connection->connect_error) {
+    die("Connection failed: " . $connection->connect_error);
+    echo('connection to db failed');
+    echo($connection);
+}
+echo("Connected successfully \n");
                                                         $db = mysqli_select_db($connection, "cmpe281");
                                                         // SQL query to fetch information of registerd users and finds user match.
                                                         $query = mysqli_query($connection, "select `username` from login where community_name = '$commname' and role = 'citizen';");
