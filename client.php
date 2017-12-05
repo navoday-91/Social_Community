@@ -305,19 +305,14 @@
                 <div class="row-fluid ">
                     <div class="span8 widget-span widget-type-widget_container column main-column" style="" data-widget-type="widget_container" data-x="0" data-w="8">
                         <span id="hs_cos_wrapper_module_14045563837526290" class="hs_cos_wrapper hs_cos_wrapper_widget_container hs_cos_wrapper_type_widget_container" style="" data-hs-cos-general-type="widget_container" data-hs-cos-type="widget_container"><div id="hs_cos_wrapper_widget_3699427007" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_rich_text" style="" data-hs-cos-general-type="widget" data-hs-cos-type="rich_text"><p><span class="hs_cos_wrapper hs_cos_wrapper_widget_container hs_cos_wrapper_type_widget_container" data-hs-cos-general-type="widget_container" data-hs-cos-type="widget_container">
-                                        <ul>
-                                            <?php
-                                            if ($_SESSION['role'] == "admin"){
-                                                ?>
+                                        
                                                 <h1>You are logged in as Administrator</h1>
                                                 <ul>
                                                     <li><h3><a href = "createcomm.php">Create a community</a></h3></li>
                                                     <li><h3><a href = "editcomm.php">Edit Community Managers</a></h3></li>
                                                 </ul>
-                                                <?php
-                                            }
-                                            ?>
-                                        </ul>
+                                             
+                                    
 </div></div></span>
                     
     </div><!--end row-->

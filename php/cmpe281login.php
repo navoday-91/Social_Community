@@ -51,7 +51,7 @@ mysqli_close($connection); // Closing Connection
 $error = "Comm Path".$commpath.",  Communty".$community;
 $_SESSION['error'] = $error;
 echo("Comm Path".$commpath."Communty".$community);
-//header("location: $commpath/index.php"); // Redirecting To Community Page
+header("location: ../index.php"); // Redirecting To Community Page
 
 }
 }
