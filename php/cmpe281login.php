@@ -1,6 +1,5 @@
 <?php
 session_start(); // Starting Session
-$community = $_POST['community'];
 $error=''; // Variable To Store Error Message
 if (isset($_POST['Login'])) {
 if (empty($_POST['user_username']) || empty($_POST['user_password'])) {
@@ -34,6 +33,7 @@ if ($connection->connect_error) {
 }
 echo("Connected successfully \n");
 $db = mysqli_select_db($connection, "cmpe281");
+$community = $_POST['community'];
 $query = mysqli_query($connection, "select * from community_details where comm_name = '$community';");
 // SQL query to fetch information of registerd users and finds user match.
 $rows = mysqli_num_rows($query);
@@ -45,10 +45,10 @@ if ($rows == 1) {
         
     }
 }
-$_SESSION['login_user']=$username; // Initializing Session
 $_SESSION['community']=$community; 
 $_SESSION['role']=$role; 
 mysqli_close($connection); // Closing Connection
+echo($commpath);
 header("location: $commpath/index.php"); // Redirecting To Community Page
 
 }

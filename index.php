@@ -27,9 +27,7 @@
             <label for="user_password" class="control-label">Password:</label>
             <input type="password" id="user_password" class="form-control" name="user_password"/>
           </div>
-          <div class="text-center pad-top-20">
-            <p>Have you forgotten your<br><a href="#" class="link"><strong>Username</strong></a> or <a href="#" class="link"><strong>Password</strong></a>?</p>
-          </div>
+          
           <?php
             session_start();
           ?>
@@ -41,9 +39,7 @@
           <div class="pad-top-20 pad-btm-20">
             <input type="submit" class="btn btn-default btn-block btn-lg" name="Login" value="Login">
           </div>
-          <div class="text-center">
-            <p>Do you wish to register<br> for <a href="register.php" class="link user-actions"><strong>a new account</strong></a>?</p>
-          </div>
+          
         </fieldset>
       </form>
       <form id="login_form" class="dialog-form" action="php/cmpe281login.php" method="POST">
