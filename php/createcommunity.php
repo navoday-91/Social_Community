@@ -31,7 +31,9 @@ else
     echo("Number of username rows = ".$rows);
     if ($rows == 0) {
         $result = system('python /usr/bin/python /var/www/html/Testing\ Ground.py '.$commname.' > /dev/null 2>&1 &');
-        echo($result);
+        $error = "Community creation in progress...";
+        $_SESSION['error1'] = $error;
+        header("location: ../createcomm.php"); // Redirecting To Registration Page
     }
     else {
         $error = "Community name is occupied, try another!";
