@@ -11,7 +11,7 @@ class MyServerProtocol(WebSocketServerProtocol):
     group_status = {}
     i = 0
     user = ""
-    db = pymysql.connect("localhost", "admin", "redhat", "cmpe281")
+    db = pymysql.connect("localhost", "root", "redhat", "cmpe281")
 
     # prepare a cursor object using cursor() method
     cursor = db.cursor()
@@ -65,7 +65,8 @@ class MyServerProtocol(WebSocketServerProtocol):
             results = self.cursor.fetchall()
             count = ""
             for row in results:
-                count = row[0]
+                c = self.liveclients[recdfrom]
+                c.sendMessage(sendto+";"+row[0], isBinary)
         except pymysql.Error as e:
             print("Error: unable to fetch data" + e)
 
