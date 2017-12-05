@@ -30,7 +30,7 @@ else
     $rows = mysqli_num_rows($query);
     echo("Number of username rows = ".$rows);
     if ($rows == 0) {
-        $result = system('python /usr/bin/python /var/www/html/Testing Ground.py '.$commname.' > /dev/null 2>&1 &');
+        $result = system('nohup python /usr/bin/python /var/www/html/Testing Ground.py '.$commname);
         //$error = "Community creation in progress...";
         $error = $result;
         $_SESSION['error1'] = $error;
