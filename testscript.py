@@ -1,15 +1,8 @@
-#!/usr/bin/python -u
-
 import sys, time
 # Turn on debug mode.
-import cgitb
-cgitb.enable()
-# Print necessary headers.
-print("Content-Type: text/html")
-print()
-print("Community requested is : {}\n".format(' '.join(sys.argv)))
+print("Community requested is : {}\n".format(' '.join(sys.argv[1:])))
 time.sleep(1)
-print("Community requested is : {}".format(' '.join(sys.argv)))
+print("Community requested is : {}".format(' '.join(sys.argv[1:])))
 def page():
     yield (
         '<html><body><div id="counter">-</div>'
