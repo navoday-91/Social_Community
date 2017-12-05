@@ -42,7 +42,7 @@
           
         </fieldset>
       </form>
-      <form id="gotoform" class="dialog-form" action="php/cmpe281login.php" method="POST">
+      <form id="gotoform" class="dialog-form" action="redirect.php" method="POST">
         <fieldset>
           <legend>Community Log in</legend>
           <?php
@@ -60,7 +60,7 @@
           ?>
 
           <div class="field-wrap">
-              <select name = "community"> Community
+              <select name = "community" id = "community"> Community
                   <option value = ""> Select Community</option>
                 <?php if ($rows > 0) {
                     while ($user = $query->fetch_assoc()) { ?>
