@@ -307,18 +307,31 @@
                         <span id="hs_cos_wrapper_module_14045563837526290" class="hs_cos_wrapper hs_cos_wrapper_widget_container hs_cos_wrapper_type_widget_container" style="" data-hs-cos-general-type="widget_container" data-hs-cos-type="widget_container"><div id="hs_cos_wrapper_widget_3699427007" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_rich_text" style="" data-hs-cos-general-type="widget" data-hs-cos-type="rich_text"><p><span class="hs_cos_wrapper hs_cos_wrapper_widget_container hs_cos_wrapper_type_widget_container" data-hs-cos-general-type="widget_container" data-hs-cos-type="widget_container">
                                         <ul>
                                             <?php if (isset($_POST['Create'])) {
-                                                if (empty($_POST['group_name']) || empty($_POST['group_type'])) {
-                                                
-                                                        $error = "Group Name can't be blank";
-                                                        $_SESSION['error3'] = $error;
-                                                }
-                                                else{
-                                                $connection = mysqli_connect("localhost", "admin", "redhat");
+                                                $dbpath = "54.183.103.17";
+                                                        // Establishing Connection with Server by passing server_name, user_id and password as a parameter
+                                                        $connection = mysqli_connect($dbpath, "root", "redhat", "cmpe281");
                                                         if ($connection->connect_error) {
                                                             die("Connection failed: " . $connection->connect_error);
                                                             echo('connection to db failed');
                                                             echo($connection);
                                                         }
+                                                        echo("Connected successfully \n");
+                                                        $db = mysqli_select_db($connection, "cmpe281");
+                                                        // SQL query to fetch information of registerd users and finds user match.
+                                                        $query = mysqli_query($connection, "select * from community_details where comm_name = $community;");
+                                                        // To protect MySQL injection for Security purpose
+                                                        if ($rows == 1) {
+                                                            while ($user = $query->fetch_assoc()) {
+                                                                $dbpath = $user["comm_db"];
+                                                                
+                                                            }
+                                                        $connection = mysqli_connect($dbpath, "admin", "redhat123", "cmpe281");
+                                                        if ($connection->connect_error) {
+                                                            die("Connection failed: " . $connection->connect_error);
+                                                            echo('connection to db failed');
+                                                            echo($connection);
+                                                        }
+                                                        echo("Connected successfully \n");
                                                         $db = mysqli_select_db($connection, "cmpe281");
                                                 $groupname = ($_POST['group_name']);
                                                 $grouptype = ($_POST['group_type']);
