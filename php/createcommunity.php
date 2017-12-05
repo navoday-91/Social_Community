@@ -31,8 +31,7 @@ else
     echo("Number of username rows = ".$rows);
     if ($rows == 0) {
         $result = system('nohup python /var/www/html/TestingGround.py '.$commname);
-        //$error = "Community creation in progress...";
-        $error = $result;
+        $error = "Community creation in progress...";
         $_SESSION['error1'] = $error;
         header("location: ../createcomm.php"); // Redirecting To Registration Page
     }
