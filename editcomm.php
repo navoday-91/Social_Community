@@ -502,7 +502,7 @@ if ($connection->connect_error) {
     echo($connection);
 }
 echo("Connected successfully \n");
-$community = $_POST['community']
+$community = $_POST['community'];
 $db = mysqli_select_db($connection, "cmpe281");
 // SQL query to fetch information of registerd users and finds user match.
 $query = mysqli_query($connection, "select * from community_details where comm_name = $community;");
