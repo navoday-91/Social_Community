@@ -3,6 +3,7 @@
 
 <?php
                                                 session_start();
+                                                $community = $_POST['community'];
                                               ?>
                                               
 <!-- start coded_template: id:3859515515 path:generated_layouts/3859515505.html --><!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]--><!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en">        <![endif]--><!--[if IE 8]>    <html class="no-js lt-ie9" lang="en">               <![endif]--><!--[if gt IE 8]><!--><html class="no-js" lang="en"><!--<![endif]--><head>
@@ -11,7 +12,7 @@
     <meta name="author" content="Open Source Communicator">
     <meta name="description" content="">
     <meta name="generator" content="HubSpot">
-    <title>Manage a Group</title>
+    <title>Delete a Community</title>
     
 
     
@@ -130,7 +131,7 @@
                             <div class="span12 widget-span widget-type-header " style="" data-widget-type="header" data-x="0" data-w="12">
                                 <div class="cell-wrapper layout-widget-wrapper">
                                     <span id="hs_cos_wrapper_module_14509432248707604" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_header" style="" data-hs-cos-general-type="widget" data-hs-cos-type="header"><h1><span id="hs_cos_wrapper_name" class="hs_cos_wrapper hs_cos_wrapper_meta_field hs_cos_wrapper_type_text" style="" data-hs-cos-general-type="meta_field" data-hs-cos-type="text">
-                                        Manage Groups
+                                        Remove Community
                                     </span></h1></span>
                                 </div><!--end layout-widget-wrapper -->
                             </div><!--end widget-span -->
@@ -140,7 +141,7 @@
                         <div class="row-fluid ">
                             <div class="span12 widget-span widget-type-rich_text " style="" data-widget-type="rich_text" data-x="0" data-w="12">
                                 <div class="cell-wrapper layout-widget-wrapper">
-                                    <span id="hs_cos_wrapper_module_14509432659418859" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_rich_text" style="" data-hs-cos-general-type="widget" data-hs-cos-type="rich_text"><p>Manage membership of groups!</p></span>
+                                    <span id="hs_cos_wrapper_module_14509432659418859" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_rich_text" style="" data-hs-cos-general-type="widget" data-hs-cos-type="rich_text"><p>Remove Communities Here!</p></span>
                                 </div><!--end layout-widget-wrapper -->
                             </div><!--end widget-span -->
                         </div><!--end row-->
@@ -306,171 +307,61 @@
                     <div class="span8 widget-span widget-type-widget_container column main-column" style="" data-widget-type="widget_container" data-x="0" data-w="8">
                         <span id="hs_cos_wrapper_module_14045563837526290" class="hs_cos_wrapper hs_cos_wrapper_widget_container hs_cos_wrapper_type_widget_container" style="" data-hs-cos-general-type="widget_container" data-hs-cos-type="widget_container"><div id="hs_cos_wrapper_widget_3699427007" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_rich_text" style="" data-hs-cos-general-type="widget" data-hs-cos-type="rich_text"><p><span class="hs_cos_wrapper hs_cos_wrapper_widget_container hs_cos_wrapper_type_widget_container" data-hs-cos-general-type="widget_container" data-hs-cos-type="widget_container">
                                         <ul>
-                                              
-                                        <form id="login_form" class="dialog-form" action="groupusers.php" method="POST">
+                                            <?php if (isset($_POST['Delete'])) {
+                                                $commname = $_POST['community'];
+                                                $result = system('python /var/www/html/deletecomm.py '.$commname.' > /dev/null 2>&1 &');
+                                                header("location: client.php");
+                                            ?>        
+                                            
+                                        <form id="login_form" class="dialog-form" action="editcomm.php" method="POST">
                                             <fieldset>
-                                                <?php if (isset($_POST['Add'])) {
-                                                
-                                                $connection = mysqli_connect("localhost", "admin", "redhat");
-                                                        if ($connection->connect_error) {
-                                                            die("Connection failed: " . $connection->connect_error);
-                                                            echo('connection to db failed');
-                                                            echo($connection);
-                                                        }
-                                                        $db = mysqli_select_db($connection, "cmpe281");
-                                                $tablename = $_SESSION['TBSETNAME'];
-                                                $User = $_POST['User'];
-                                                $Roles = $_POST['Roles'];
-                                                // Selecting Database
-                                                $db = mysqli_select_db($connection, "cmpe281");
-                                                $query = mysqli_query($connection, "insert into `$tablename` values('$User','$Roles');");
-                                                
-                                                    $error = "New member added!".$community;
-                                                    $_SESSION['error3'] = $error;
-                                                }
-                                                 
-                                              
-                                            ?>
-                                            <?php if (isset($_POST['Remove'])) {
-                                                
-                                                $connection = mysqli_connect("localhost", "admin", "redhat");
-                                                        if ($connection->connect_error) {
-                                                            die("Connection failed: " . $connection->connect_error);
-                                                            echo('connection to db failed');
-                                                            echo($connection);
-                                                        }
-                                                        $db = mysqli_select_db($connection, "cmpe281");
-                                                $tablename = $_SESSION['TBSETNAME'];
-                                                $User = $_POST['members'];
-                                                // Selecting Database
-                                                $db = mysqli_select_db($connection, "cmpe281");
-                                                $query = mysqli_query($connection, "delete from `$tablename` where member = '$User';");
-                                                
-                                                    $error = "Member Removed!";
-                                                    $_SESSION['error2'] = $error;
-                                                }
-                                                 
-                                              
-                                            ?>
-                                              <legend>Add Users & Roles:</legend>
+                                              <legend>Delete a Community</legend>
                                               <div class="form-group">
                                                 
                                                 <?php
-                                                        $connection = mysqli_connect("localhost", "admin", "redhat");
-                                                        if ($connection->connect_error) {
-                                                            die("Connection failed: " . $connection->connect_error);
-                                                            echo('connection to db failed');
-                                                            echo($connection);
-                                                        }
-                                                        $db = mysqli_select_db($connection, "cmpe281");
-                                                        $community = $_SESSION['community'];
-                                                        if ($_SESSION['TBSET'] == 0){
-                                                            $tablename = $_POST['groups'].$community;
-                                                            $_SESSION['TBSETNAME'] = $tablename;
-                                                        }
-                                                        else{
-                                                            $tablename = $_SESSION['TBSETNAME'];
-                                                        }
-                                                        $_SESSION['TBSET'] += 1;
-                                                        
-                                                        
-                                                        // SQL query to fetch users.
-                                                        $query = mysqli_query($connection, "select login.`username`, userdata.`first name`, userdata.`last name` from userdata, login where userdata.username = login.username and login.community_name = '$community' ;");
-                                                        $rows = mysqli_num_rows($query);
+                                                        $dbpath = "54.183.103.17";
+                                                // Establishing Connection with Server by passing server_name, user_id and password as a parameter
+                                                $connection = mysqli_connect($dbpath, "root", "redhat", "cmpe281");
+                                                if ($connection->connect_error) {
+                                                    die("Connection failed: " . $connection->connect_error);
+                                                    echo('connection to db failed');
+                                                    echo($connection);
+                                                }
+                                                $db = mysqli_select_db($connection, "cmpe281");
+                                                // SQL query to fetch information of registerd users and finds user match.
+                                                $query = mysqli_query($connection, "select * from community_details;");
+                                                $rows = mysqli_num_rows($query);
                                                         
                                                   ?>
-                                                  <label for="User" class="control-label">Community Member:</label>
-                                                  <select id="User" class="form-control" name = "User" autofocus> 
+                                                  <label for="community" class="control-label">Community Name:</label>
+                                                  <select id="community" class="form-control" name = "community" autofocus> 
+                                                          <option value = ""> Select Community</option>
                                                         <?php if ($rows > 0) {
                                                             while ($user = $query->fetch_assoc()) { ?>
-                                                                <option value = "<?php echo($user['username']); ?>"><?php echo($user['username']."    ".$user['first name'." ".$user['last name']]);
+                                                                <option value = "<?php echo($user['comm_name']); ?>"> <?php echo($user['comm_name']);
                                                         ?></option>
                                                         <?php } } 
                                                             else{?>
-                                                                <option value = ""> No Users Available</option>
+                                                                <option value = ""> No Communities Available</option>
                                                         <?php } ?>
-                                                    </select>
-                                                    <label for="Roles" class="control-label">Role:</label>
-                                                    <select id="Roles" class="form-control" name = "Roles" autofocus> 
-                                                                <option value = "admin"> Administrator</option>
-                                                                <option value = "contributor"> Contributor</option>
                                                     </select>
                                               </div>
                             
-                                              <?php if (isset($_SESSION['error3'])){ ?>
+                                              <?php if (isset($_SESSION['error1'])){ ?>
                                               <div class="text-center pad-top-20">
-                                                <p><font color="red"><strong><?php echo($_SESSION['error3']); ?></strong></font></p>
+                                                <p><font color="red"><strong><?php echo($_SESSION['error1']); ?></strong></font></p>
                                               </div>
                                               <?php
-                                                  $_SESSION['error3'] = "";
+                                                  $_SESSION['error1'] = "";
                                                   } 
-                                                  if ($rows > 0){
                                               ?>
                                               <div class="pad-top-20 pad-btm-20">
-                                                <input type="submit" class="btn btn-default btn-block btn-lg" name="Add" value="Add">
+                                                <input type="submit" class="btn btn-default btn-block btn-lg" name="Delete" value="Delete">
                                               </div>
-                                              <?php } ?>
+                                              
                                             </fieldset>
                                           </form>
                                           
-                                          <form id="remove_form" class="dialog-form" action="groupusers.php" method="POST">
-                                            <fieldset>
-                                              <legend>Remove existing users:</legend>
-                                              <div class="form-group">
-                                                
-                                                <?php
-                                                        $connection = mysqli_connect("localhost", "admin", "redhat");
-                                                        if ($connection->connect_error) {
-                                                            die("Connection failed: " . $connection->connect_error);
-                                                            echo('connection to db failed');
-                                                            echo($connection);
-                                                        }
-                                                        
-                                                        $db = mysqli_select_db($connection, "cmpe281");
-                                                        $community = $_SESSION['community'];
-                                                        if ($_SESSION['TBSET'] == 0){
-                                                            $tablename = $_POST['groups'].$community;
-                                                            $_SESSION['TBSETNAME'] = $tablename;
-                                                        }
-                                                        else{
-                                                            $tablename = $_SESSION['TBSETNAME'];
-                                                        }
-                                                        $_SESSION['TBSET'] += 1;
-                                                        
-                                                        // SQL query to fetch communities.
-                                                        $query = mysqli_query($connection, "select `member`, `role` from `$tablename`;");
-                                                        $rows = mysqli_num_rows($query);
-                                                        
-                                                  ?>
-                                                  <label for="members" class="control-label">Group Members:</label>
-                                                  <select id="members" class="form-control" name = "members" autofocus> 
-                                                        <?php if ($rows > 0) {
-                                                            while ($user = $query->fetch_assoc()) { ?>
-                                                                <option value = "<?php echo($user['member']); ?>"><?php echo($user['member']." - ".$user['role']);
-                                                        ?></option>
-                                                        <?php } } 
-                                                            else{?>
-                                                                <option value = ""> No Members Available</option>
-                                                        <?php } ?>
-                                                    </select>
-                                              </div>
-                            
-                                              <?php if (isset($_SESSION['error2'])){ ?>
-                                              <div class="text-center pad-top-20">
-                                                <p><font color="red"><strong><?php echo($_SESSION['error2']); ?></strong></font></p>
-                                              </div>
-                                              <?php
-                                                  $_SESSION['error2'] = "";
-                                                  }
-                                                  if ($rows > 0){
-                                              ?>
-                                              <div class="pad-top-20 pad-btm-20">
-                                                <input type="submit" class="btn btn-default btn-block btn-lg" name="Remove" value="Remove">
-                                              </div>
-                                              <?php }?>
-                                            </fieldset>
-                                          </form>
-                                              
                                         </ul>
 </div></div></span>
                     

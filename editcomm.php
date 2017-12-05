@@ -400,7 +400,7 @@ if ($connection->connect_error) {
                                                           <option value = ""> Select Community</option>
                                                         <?php if ($rows > 0) {
                                                             while ($user = $query->fetch_assoc()) { ?>
-                                                                <option value = "<?php echo($user['community_name']); ?>" <?php if ($user['comm_name'] == $_SESSION['addmgrcomm']){echo('selected');} ?>> <?php echo($user['comm_name']);
+                                                                <option value = "<?php echo($user['comm_name']); ?>" <?php if ($user['comm_name'] == $_SESSION['addmgrcomm']){echo('selected');} ?>> <?php echo($user['comm_name']);
                                                         ?></option>
                                                         <?php } } 
                                                             else{?>
