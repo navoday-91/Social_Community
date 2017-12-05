@@ -7,8 +7,8 @@ from pymysql import MySQLError
 key_id = ""
 accesskey = ""
 
-community_name = ' '.join(sys.argv[1:])
-
+community_name_full = ' '.join(sys.argv[1:])
+community_name = ''.join(e for e in community_name_full if e.isalnum())
 
 elbv2 = boto3.client('elbv2', aws_access_key_id=key_id,
                          aws_secret_access_key=accesskey, region_name='us-west-1')
@@ -67,7 +67,7 @@ rds = boto3.client('rds', aws_access_key_id=key_id,
 
 rds_response = rds.create_db_instance(
     AllocatedStorage=5,
-    DBName=''.join(e for e in community_name if e.isalnum()),
+    DBName=community_name,
     DBInstanceClass='db.t2.micro',
     DBInstanceIdentifier=community_name+"rdsdb",
     Engine='MySQL',
@@ -98,7 +98,7 @@ except MySQLError as e:
     print(e)
 # prepare a cursor object using cursor() method
 cursor = db.cursor()
-sql = "insert into community_details values('"+community_name+"',"+rds_arn+"',"+community_name+"rdsdb"+"',"+\
+sql = "insert into community_details values('"+community_name_full+"',"+rds_arn+"',"+community_name+"rdsdb"+"',"+\
       rds_ip+"',"+target_group_arn+"',"+lb_arn+"',"+lb_ip+")"
 
 try:
