@@ -42,9 +42,9 @@
           
         </fieldset>
       </form>
-      <form id="login_form" class="dialog-form" action="php/cmpe281login.php" method="POST">
+      <form id="gotoform" class="dialog-form" action="php/cmpe281login.php" method="POST">
         <fieldset>
-          <legend>Community Log in and Registration</legend>
+          <legend>Community Log in</legend>
           <?php
                 $connection = mysqli_connect("localhost", "root", "redhat");
                 if ($connection->connect_error) {
