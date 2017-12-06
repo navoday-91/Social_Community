@@ -4,6 +4,7 @@
 <?php
                                                 session_start();
                                                 $community = $_POST['community'];
+                                                $_SESSION['community'] = $community;
                                               ?>
                                               
 <!-- start coded_template: id:3859515515 path:generated_layouts/3859515505.html --><!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]--><!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en">        <![endif]--><!--[if IE 8]>    <html class="no-js lt-ie9" lang="en">               <![endif]--><!--[if gt IE 8]><!--><html class="no-js" lang="en"><!--<![endif]--><head>
@@ -402,7 +403,7 @@ if ($connection->connect_error) {
                                                           <option value = ""> Select Community</option>
                                                         <?php if ($rows > 0) {
                                                             while ($user = $query->fetch_assoc()) { ?>
-                                                                <option value = "<?php echo($user['comm_name']); ?>" <?php if ($user['comm_name'] == $_SESSION['addmgrcomm']){echo('selected');} ?>> <?php echo($user['comm_name']);
+                                                                <option value = "<?php echo($user['comm_name']); ?>" > <?php echo($user['comm_name']);
                                                         ?></option>
                                                         <?php } } 
                                                             else{?>
@@ -463,7 +464,7 @@ if ($connection->connect_error) {
                                                 }
                                                 $db = mysqli_select_db($connection, "cmpe281");
                                                 // SQL query to fetch information of registerd users and finds user match.
-                                                $query = mysqli_query($connection, "select login.`username`, userdata.`first name`, userdata.`last name` from userdata, login where userdata.username = login.username and login.community_name = '$commname' and login.role = 'manager';");
+                                                $query = mysqli_query($connection, "select login.`username`, userdata.`first name`, userdata.`last name` from userdata, login where userdata.username = login.username and login.role = 'manager';");
                                                 $rows = mysqli_num_rows($query);
                                                 
                                                 if ($rows == 0) {
@@ -522,7 +523,7 @@ if ($connection->connect_error) {
 }
                                                         $db = mysqli_select_db($connection, "cmpe281");
                                                         // SQL query to fetch information of registerd users and finds user match.
-                                                        $query = mysqli_query($connection, "select `username` from login where community_name = '$commname' and role = 'citizen';");
+                                                        $query = mysqli_query($connection, "select `username` from login and role = 'citizen';");
                                                         $rows = mysqli_num_rows($query);
                                                         if ($rows > 0) {
                                                             while ($user = $query->fetch_assoc()) { 
