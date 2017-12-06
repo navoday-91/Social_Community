@@ -26,5 +26,5 @@ if ($rows == 1) {
 $_SESSION['community']=$community; 
 mysqli_close($connection); // Closing Connection
 $_GET['community'] = $community;
-header("location: http://$commpath/index.php?community =".$community); // Redirecting To Community Page
+header("location: http://$commpath/index.php?community=".$community); // Redirecting To Community Page
 ?>
