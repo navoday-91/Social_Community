@@ -305,29 +305,7 @@
                 <div class="row-fluid ">
                     <div class="span8 widget-span widget-type-widget_container column main-column" style="" data-widget-type="widget_container" data-x="0" data-w="8">
                         <span id="hs_cos_wrapper_module_14045563837526290" class="hs_cos_wrapper hs_cos_wrapper_widget_container hs_cos_wrapper_type_widget_container" style="" data-hs-cos-general-type="widget_container" data-hs-cos-type="widget_container"><div id="hs_cos_wrapper_widget_3699427007" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_rich_text" style="" data-hs-cos-general-type="widget" data-hs-cos-type="rich_text"><p><span class="hs_cos_wrapper hs_cos_wrapper_widget_container hs_cos_wrapper_type_widget_container" data-hs-cos-general-type="widget_container" data-hs-cos-type="widget_container">
-                                        <ul>
-                                        <form id="login_form" class="dialog-form" action="php/createcommunity.php" method="POST">
-                                            <fieldset>
-                                              <legend>Create a Community</legend>
-                                              <div class="form-group">
-                                                <label for="community_name" class="control-label">Community Name:</label>
-                                                <input type="text" id="community_name" class="form-control" name="community_name" autofocus/>
-                                              </div>
-                            
-                                              <?php if (isset($_SESSION['error1'])){ ?>
-                                              <div class="text-center pad-top-20">
-                                                <p><font color="red"><strong><?php echo($_SESSION['error1']); ?></strong></font></p>
-                                              </div>
-                                              <?php
-                                                  $_SESSION['error1'] = "";
-                                                  } 
-                                              ?>
-                                              <div class="pad-top-20 pad-btm-20">
-                                                <input type="submit" class="btn btn-default btn-block btn-lg" name="Create" value="Create">
-                                              </div>
-                                              
-                                            </fieldset>
-                                          </form>
+                                        
                                           <?php
                                           $handle = popen('python3 -u commstatus.py', 'r');
                                           while (!feof($handle)) {
@@ -337,7 +315,7 @@
                                             }
                                             pclose($handle);
                                           ?>
-                                        </ul>
+                                    
 </div></div></span>
                     
     </div><!--end row-->
