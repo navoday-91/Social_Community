@@ -311,6 +311,7 @@
                                                     <li><h3><a href = "createcomm.php">Create a community</a></h3></li>
                                                     <li><h3><a href = "editcomm.php">Edit Community Managers</a></h3></li>
                                                     <li><h3><a href = "delcomm.php">Remove a community</a></h3></li>
+                                                    <li><h3><a href = "Community_Status.php">Status Of Community Resources</a></h3></li>
                                                 </ul>
                                              
                                     
