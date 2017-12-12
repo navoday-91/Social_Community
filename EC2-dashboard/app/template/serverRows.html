@@ -1,0 +1,24 @@
+<tr ng-repeat="server in servers | orderBy:sortorder track by server.id" ng-class="{ 'selected': server.Selected }">
+  <td class="server-selector"><input type="checkbox" ng-model="server.Selected"></td>
+  <td class="server-name">
+    <b>{{server.name}}</b> <small>({{server.id}})</small><br/>
+    <span class="text-muted small"><b>Public IP:</b> {{server.publicIP}} :: <b>Private IP:</b> {{server.privateIP}}</span>
+    <br/>
+  </td>
+  <td class="server-type">
+    <b>{{server.type}}</b><br/>
+    <span class="text-muted small">{{server.az}}</span>
+  </td>
+  <td class="server-actions">
+    <div class="input-group server-actions">
+      <span class="input-group-addon indication">
+        <span class="indicator" ng-class="server.state"></span><span class="hidden-xs text">{{server.state}}</span>
+      </span>
+      <div class="input-group-btn">
+        <button ng-if="server.state=='stopped'" type="button" class="btn btn-default" ng-click="server.state='running'"><span class="glyphicon glyphicon-play" aria-hidden="true"></span> <span class="hidden-xs">Run</span></button>
+        <button ng-if="server.state=='running'" type="button" class="btn btn-default" ng-click="server.state='stopped'"><span class="glyphicon glyphicon-stop" aria-hidden="true"></span> <span class="hidden-xs">Stop</span></button>
+        <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-repeat" aria-hidden="true"></span> <span class="hidden-xs">Restart</span></button>
+      </div>
+    </div>
+  </td>
+</tr>

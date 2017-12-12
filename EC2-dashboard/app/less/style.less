@@ -1,0 +1,97 @@
+body {
+  background-color: #E0E0E0;
+}
+
+.indicator {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 4px;
+  transition: background-color 350ms, box-shadow 700ms;
+  -o-transition: background-color 350ms, box-shadow 700ms;
+  -moz-transition: background-color 350ms, box-shadow 700ms;
+  -webkit-transition: background-color 350ms, box-shadow 700ms;
+
+  &.stopped {
+    background-color: rgb(226,0,0);
+    box-shadow: inset 0px 1px 0px 0px rgba(250,250,250,0.5), 0px 0px 3px 2px rgba(226,0,0,0.25);
+  }
+
+  &.running {
+    background-color: #4CCB02;
+    box-shadow: inset 0px 1px 0px 0px rgba(250, 250, 250, 0.5), 0px 0px 3px 2px rgba(66, 226, 0, 0.25);
+  }
+
+  &.default {
+    background-color: #00C8E2;
+    box-shadow: inset 0px 1px 0px 0px rgba(250, 250, 250, 0.5), 0px 0px 3px 2px rgba(0, 226, 226, 0.25);
+  }
+}
+
+.select-all {
+  margin-top: 1rem;
+}
+
+.dash {
+  padding: 2rem inherit;
+}
+
+.server-rows {
+
+  tr.selected {
+    background: #f5f5f5;
+  }
+
+  .server-selector {
+    padding-left: 1.5rem;
+    width: 2%;
+  }
+
+  .server-name {
+    width: 50%;
+  }
+
+  .server-type {
+    width: 20%;
+  }
+
+  .server-actions {
+    width: 30%;
+  }
+
+  .server-actions {
+    width: 300px;
+
+    @media (max-width: 768px) {
+      width: 150px;
+    }
+  }
+
+  .indication {
+    padding: 6px 6px;
+    background: #333;
+    color: #999;
+    text-transform: uppercase;
+    font-size: 1.1rem;
+
+    @media (max-width: 768px) {
+      padding: 6px 2px;
+    }
+
+    span.text {
+      margin-left: .875rem;
+    }
+  }
+}
+
+.thumbnail {
+
+  .caption {
+    background: #777;
+    color: #fff;
+  }
+
+  h2, h3 {
+    margin:.25rem 0;
+  }
+}
