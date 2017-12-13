@@ -9,15 +9,12 @@
     <script src="../node_modules/angular/angular.js"></script>
     <script src="js/app.js"></script>
     <script>
-        function runPyScript(input){
+        
             var jqXHR = $.ajax({
                 type: "POST",
                 url: "/var/www/html/commstatus.py",
                 async: false
             });
-
-    return jqXHR.responseText;
-}
     </script>
   </head>
   <body>
