@@ -8,16 +8,11 @@
     <link href="css/style.css" rel="stylesheet">
     <script src="../node_modules/angular/angular.js"></script>
     <script src="js/app.js"></script>
-    <script>
-        
-            var jqXHR = $.ajax({
-                type: "POST",
-                url: "/var/www/html/commstatus.py",
-                async: false
-            });
-    </script>
   </head>
   <body>
+      <?php 
+          $handle = popen('python3 -u /var/www/html/commstatus.py', 'r');
+      ?>
     <nav class="navbar navbar-inverse" role="navigation">
       <div class="container-fluid">
         <div class="navbar-header">
