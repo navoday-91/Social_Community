@@ -10,7 +10,7 @@ var EC2Dash = EC2Dash || {};
       if (value.state === "running") {
         serverState.running ++;
 
-      } else if (value.state === "stopped") {
+      } else if (value.state != "running") {
         serverState.stopped ++;
       }
 
@@ -60,7 +60,7 @@ var app = angular.module('dashboardApp', [])
 
       angular.forEach($scope.servers, function (item) {
 
-          if (item.Selected == true) {
+          if (item.Selected === true) {
             item.state = "running";
           }
       });
@@ -70,7 +70,7 @@ var app = angular.module('dashboardApp', [])
 
       angular.forEach($scope.servers, function (item) {
 
-          if (item.Selected == true) {
+          if (item.Selected === true) {
             item.state = "stopped";
           }
       });
@@ -80,7 +80,7 @@ var app = angular.module('dashboardApp', [])
       var count = 0;
       angular.forEach($scope.servers, function (item) {
 
-          if (item.Selected == true) {
+          if (item.Selected === true) {
             count ++
           }
       });
