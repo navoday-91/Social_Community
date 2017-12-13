@@ -11,7 +11,7 @@
   </head>
   <body>
       <?php 
-          $handle = popen('python3 /var/www/html/commstatus.py', 'r');
+          $handle = popen('python3 -u /var/www/html/commstatus.py', 'r');
       ?>
     <nav class="navbar navbar-inverse" role="navigation">
       <div class="container-fluid">
