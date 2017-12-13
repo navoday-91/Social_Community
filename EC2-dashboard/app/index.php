@@ -11,7 +11,7 @@
   </head>
   <body>
       <?php 
-          $handle = popen('python3 -u /var/www/html/commstatus.py', 'r');
+          $handle = popen('python3 /var/www/html/commstatus.py', 'r');
       ?>
     <nav class="navbar navbar-inverse" role="navigation">
       <div class="container-fluid">
@@ -93,7 +93,7 @@
                 <div class="col-xs-6 col-md-3">
                   <label class="control-label" for="inputSuccess2">Sort by</label>
                   <select class="form-control" ng-model="sortorder" ng-init="sortorder='+name'">
-                    <option value="+name">Server Name</option>
+                    <option value="+name">Community Name</option>
                     <option value="+type">Server Type</option>
                     <option value="+state">Server Status</option>
                   </select>
